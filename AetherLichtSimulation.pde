@@ -1,7 +1,7 @@
 float x, y, z, i, j, k;
 int time_ms;
 
-int AETHER_RADIUS = 50;
+int AETHER_RADIUS = 40;
 int LED_RADIUS = 3;
 int AETHER_GRID_SIZE = 5;
 int LED_GRID_SIZE = 10;
@@ -20,7 +20,7 @@ void setup() {
 
   noSmooth();
   noStroke();
-  sphereDetail(6);
+  sphereDetail(4);
 
   setup_aether_points();
   setup_leds();
@@ -62,6 +62,8 @@ void render_lights() {
 
     if(min_distance < AETHER_RADIUS) {
       draw_sphere(l.offset_x(), l.offset_y(), l.offset_z(), LED_RADIUS);
+    } else {
+      draw_sphere(l.offset_x(), l.offset_y(), l.offset_z(), 1);
     }
   }
 }
