@@ -43,13 +43,6 @@ void draw() {
   }
 }
 
-void draw_sphere(float x, float y, float z, float r) {
-  translate(x, y, z);
-  lights();
-  sphere(r);
-  translate(-x, -y, -z);
-}
-
 void render_lights() {
   // TODO Render LED lights
 }
@@ -63,34 +56,9 @@ void render_aether() {
   }
 }
 
-void setup_aether_points() {
-  aether_points = new AetherPoint[AETHER_GRID_SIZE*AETHER_GRID_SIZE*AETHER_GRID_SIZE];
-  int index = 0;
-  for (i = 0; i < AETHER_GRID_SIZE; i = i+1) {
-    for (j = 0; j < AETHER_GRID_SIZE; j = j+1) {
-      for (k = 0; k < AETHER_GRID_SIZE; k = k+1) {
-        x = 1.0 * i * width/AETHER_GRID_SIZE;
-        y = 1.0 * j * width/AETHER_GRID_SIZE;
-        z = k * 25;
-        aether_points[index] = new AetherPoint(x, y, z);
-        index += 1;
-      }
-    }
-  }
-}
-
-void setup_leds() {
-  leds = new LedPoint[LED_GRID_SIZE*LED_GRID_SIZE*LED_GRID_SIZE];
-  int index = 0;
-  for (i = 0; i < LED_GRID_SIZE; i = i+1) {
-    for (j = 0; j < LED_GRID_SIZE; j = j+1) {
-      for (k = 0; k < LED_GRID_SIZE; k = k+1) {
-        x = 1.0 * i * width/LED_GRID_SIZE;
-        y = 1.0 * j * width/LED_GRID_SIZE;
-        z = k * 25;
-        leds[index] = new LedPoint(x, y, z);
-        index += 1;
-      }
-    }
-  }
+void draw_sphere(float x, float y, float z, float r) {
+  translate(x, y, z);
+  lights();
+  sphere(r);
+  translate(-x, -y, -z);
 }
