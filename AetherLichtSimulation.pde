@@ -11,6 +11,8 @@ AetherPoint[] aether_points; // = new AetherPoint[AETHER_GRID_SIZE**3];
 // These are the LEDs, that light up when Aether touches them
 LedPoint[] leds; // = new LedPoint[AETHER_GRID_SIZE**3];
 
+// This represents the global periodic movement of the Aether
+GlobalWave global_wave;
 
 void setup() {
   size(800, 600, P3D);
@@ -21,6 +23,8 @@ void setup() {
 
   setup_aether_points();
   setup_leds();
+
+  global_wave = new GlobalWave(4000.0);
 }
 
 void draw() {
@@ -46,14 +50,15 @@ void draw_sphere(float x, float y, float z, float r) {
   translate(-x, -y, -z);
 }
 
-// TODO Render LED lights
-void render_lights() {}
+void render_lights() {
+  // TODO Render LED lights
+}
 
 void render_aether() {
   for(AetherPoint p : aether_points) {
-    x = p.x + cos((time_ms + 100*p.random_offset)*TWO_PI/4000) * width/AETHER_GRID_SIZE;
-    y = p.y;
-    z = p.z;
+    x = p.x + p.random_offset * width/AETHER_GRID_SIZE + global_wave.offset_x(time_ms);
+    y = p.y + global_wave.offset_y(time_ms);
+    z = p.z + global_wave.offset_z(time_ms);
     draw_sphere(x, y, z, AETHER_RADIUS);
   }
 }
@@ -75,7 +80,7 @@ void setup_aether_points() {
 }
 
 void setup_leds() {
-  leds = new AetherPoint[LED_GRID_SIZE*LED_GRID_SIZE*LED_GRID_SIZE];
+  leds = new LedPoint[LED_GRID_SIZE*LED_GRID_SIZE*LED_GRID_SIZE];
   int index = 0;
   for (i = 0; i < LED_GRID_SIZE; i = i+1) {
     for (j = 0; j < LED_GRID_SIZE; j = j+1) {
@@ -83,7 +88,7 @@ void setup_leds() {
         x = 1.0 * i * width/LED_GRID_SIZE;
         y = 1.0 * j * width/LED_GRID_SIZE;
         z = k * 25;
-        leds[index] = new AetherPoint(x, y, z);
+        leds[index] = new LedPoint(x, y, z);
         index += 1;
       }
     }
