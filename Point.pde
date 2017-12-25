@@ -8,4 +8,8 @@ class Point {
     y = yy;
     z = zz;
   }
+
+  float offset_x() { return x; }
+  float offset_y() { return y; }
+  float offset_z() { return z; }
 }

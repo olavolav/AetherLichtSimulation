@@ -49,9 +49,9 @@ void render_lights() {
 
 void render_aether() {
   for(AetherPoint p : aether_points) {
-    x = p.x + p.random_offset * width/AETHER_GRID_SIZE + global_wave.offset_x(time_ms);
-    y = p.y + global_wave.offset_y(time_ms);
-    z = p.z + global_wave.offset_z(time_ms);
+    x = p.offset_x() + global_wave.offset_x(time_ms);
+    y = p.offset_y() + global_wave.offset_y(time_ms);
+    z = p.offset_z() + global_wave.offset_z(time_ms);
     draw_sphere(x, y, z, AETHER_RADIUS);
   }
 }

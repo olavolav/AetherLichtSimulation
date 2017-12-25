@@ -5,6 +5,10 @@ class AetherPoint extends Point {
     super(xx, yy, zz);
     random_offset = randomGaussian();
   }
+
+  float offset_x() {
+    return x + random_offset * 0.3*width/AETHER_GRID_SIZE;
+  }
 }
 
 void setup_aether_points() {
