@@ -9,7 +9,7 @@ int LED_GRID_SIZE = 10;
 AetherPoint[] aether_points; // = new AetherPoint[AETHER_GRID_SIZE**3];
 
 // These are the LEDs, that light up when Aether touches them
-// LedPoint[] leds; // = new LedPoint[AETHER_GRID_SIZE**3];
+LedPoint[] leds; // = new LedPoint[AETHER_GRID_SIZE**3];
 
 
 void setup() {
@@ -74,4 +74,18 @@ void setup_aether_points() {
   }
 }
 
-void setup_leds() {}
+void setup_leds() {
+  leds = new AetherPoint[LED_GRID_SIZE*LED_GRID_SIZE*LED_GRID_SIZE];
+  int index = 0;
+  for (i = 0; i < LED_GRID_SIZE; i = i+1) {
+    for (j = 0; j < LED_GRID_SIZE; j = j+1) {
+      for (k = 0; k < LED_GRID_SIZE; k = k+1) {
+        x = 1.0 * i * width/LED_GRID_SIZE;
+        y = 1.0 * j * width/LED_GRID_SIZE;
+        z = k * 25;
+        leds[index] = new AetherPoint(x, y, z);
+        index += 1;
+      }
+    }
+  }
+}
