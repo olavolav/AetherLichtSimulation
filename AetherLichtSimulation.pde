@@ -1,7 +1,9 @@
-float t;
+float x, y, z, i, j, k;
+int time_ms;
 
 int AETHER_RADIUS = 20;
-int GRID_SIZE = 10;
+int AETHER_GRID_SIZE = 8;
+int LED_GRID_SIZE = 10;
 
 void setup() {
   size(800, 600, P3D);
@@ -9,13 +11,10 @@ void setup() {
   noSmooth();
   noStroke();
   sphereDetail(6);
-
-  // Frame counter
-  t = 0;
 }
 
 void draw() {
-  t = t + 1;
+  time_ms = millis();
 
   background(50);
   color(255);
@@ -30,10 +29,10 @@ void draw() {
   }
 }
 
-void draw_sphere(float x, float y, float z) {
+void draw_sphere(float x, float y, float z, float r) {
   translate(x, y, z);
   lights();
-  sphere(AETHER_RADIUS);
+  sphere(r);
   translate(-x, -y, -z);
 }
 
@@ -42,10 +41,13 @@ void render_lights() {
 }
 
 void render_aether() {
-  for (int i = 0; i < GRID_SIZE; i = i+1) {
-    for (int j = 0; j < GRID_SIZE; j = j+1) {
-      for (int k = 0; k < GRID_SIZE; k = k+1) {
-        draw_sphere(1.0*i/GRID_SIZE*width, 1.0*j/GRID_SIZE*height, k*25);
+  for (i = 0; i < AETHER_GRID_SIZE; i = i+1) {
+    for (j = 0; j < AETHER_GRID_SIZE; j = j+1) {
+      for (k = 0; k < AETHER_GRID_SIZE; k = k+1) {
+        x = (1.0*i + cos(time_ms*TWO_PI/4000)) * width/AETHER_GRID_SIZE;
+        y = 1.0*j/AETHER_GRID_SIZE*height;
+        z = k * 25;
+        draw_sphere(x, y, z, AETHER_RADIUS);
       }
     }
   }
