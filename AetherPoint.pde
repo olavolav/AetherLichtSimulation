@@ -7,7 +7,7 @@ class AetherPoint extends Point {
   }
 
   float offset_x() {
-    return x + random_offset * 0.3*width/AETHER_GRID_SIZE;
+    return x + random_offset * 0.1*width/AETHER_GRID_SIZE;
   }
 }
 
