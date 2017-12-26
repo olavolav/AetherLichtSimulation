@@ -2,7 +2,7 @@ float x, y, z, i, j, k;
 int time_ms;
 
 int AETHER_RADIUS = 40;
-int LED_RADIUS = 3;
+int LED_RADIUS = 8;
 int AETHER_GRID_SIZE = 5;
 int LED_GRID_SIZE = 10;
 
@@ -60,11 +60,7 @@ void render_lights() {
       }
     }
 
-    if(min_distance < AETHER_RADIUS) {
-      draw_sphere(l.offset_x(), l.offset_y(), l.offset_z(), LED_RADIUS);
-    } else {
-      draw_sphere(l.offset_x(), l.offset_y(), l.offset_z(), 1);
-    }
+    draw_variable_sphere(l.offset_x(), l.offset_y(), l.offset_z(), min_distance);
   }
 }
 
@@ -75,6 +71,11 @@ void render_aether() {
     z = p.offset_z() + global_wave.offset_z(time_ms);
     draw_sphere(x, y, z, AETHER_RADIUS);
   }
+}
+
+void draw_variable_sphere(float x, float y, float z, float min_distance) {
+  float r = (LED_RADIUS - 1.0) * exp(-min_distance/10.0) + 1.0;
+  draw_sphere(x, y, z, r);
 }
 
 void draw_sphere(float x, float y, float z, float r) {
