@@ -19,7 +19,7 @@ void setup_aether_points() {
       for (k = 0; k < AETHER_GRID_SIZE; k = k+1) {
         x = 1.0 * i * width/AETHER_GRID_SIZE;
         y = 1.0 * j * height/AETHER_GRID_SIZE;
-        z = -1.0 * (k * height/AETHER_GRID_SIZE + 300);
+        z = -1.0 * (k * height/AETHER_GRID_SIZE + DEPTH_OFFSET_OF_ROOM);
         aether_points[index] = new AetherPoint(x, y, z);
         index += 1;
       }

@@ -1,10 +1,12 @@
-float x, y, z, i, j, k;
+float x, y, z;
+int i, j, k;
 int time_ms;
 
 int AETHER_RADIUS = 40;
 int LED_RADIUS = 8;
 int AETHER_GRID_SIZE = 5;
 int LED_GRID_SIZE = 10;
+int DEPTH_OFFSET_OF_ROOM = 300;
 
 // These represent points of Aether that float through space
 AetherPoint[] aether_points; // = new AetherPoint[AETHER_GRID_SIZE**3];
@@ -23,7 +25,7 @@ void setup() {
   sphereDetail(4);
 
   setup_aether_points();
-  setup_leds();
+  setup_leds_randomly();
 
   global_wave = new GlobalWave(4000.0);
 }
@@ -74,7 +76,7 @@ void render_aether() {
 }
 
 void draw_variable_sphere(float x, float y, float z, float min_distance) {
-  float r = (LED_RADIUS - 1.0) * exp(-min_distance/10.0) + 1.0;
+  float r = (LED_RADIUS - 1.0) * exp(-min_distance/20.0) + 1.0;
   draw_sphere(x, y, z, r);
 }
 
